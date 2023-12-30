@@ -4,6 +4,17 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Badge } from "@/components/ui/badge"
 import Image from 'next/image';
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+
 
 
 export default async function Home() {
@@ -14,10 +25,27 @@ export default async function Home() {
       <div className="mb-10 text-center">
         <h1 className="text-5xl text-white font-bold">Recipes</h1>
         <p className="text-xl text-white mt-2">Your ultimate source for culinary inspiration!</p>
+        <br/>
+        <Drawer>
+          <DrawerTrigger className='bg-white text-blue-700 p-4 rounded-lg font-bold'>Filter</DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>Are you sure absolutely sure?</DrawerTitle>
+              <DrawerDescription>This action cannot be undone.</DrawerDescription>
+            </DrawerHeader>
+            <DrawerFooter>
+              <Button>Submit</Button>
+              <DrawerClose>
+                <Button variant="outline">Cancel</Button>
+              </DrawerClose>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+
       </div>
       <div className="flex items-center space-x-10">
         {recipes.map((recipe: any) => (
-          <Card key={recipe.id}>
+          <Card className='bg-white shadow-2xl' key={recipe.id}>
             <CardContent className='p-6'>
               <Image
                 alt="Recipe Image"
