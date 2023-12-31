@@ -54,7 +54,7 @@ export default async function Home() {
                 src="https://via.placeholder.com/640x360"
                 width="200"
               />
-              <Link className="text-lg font-bold text-black transition-colors hover:text-gray-600" href="#">
+              <Link className="text-lg font-bold text-black transition-colors hover:text-gray-600" href={`/recipes/${recipe.id}`}>
                 {recipe.name}
               </Link>
               <p className="text-gray-500 text-sm mt-2">Fast and easy stir fry recipe for a healthy meal.</p>
