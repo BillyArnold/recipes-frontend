@@ -21,7 +21,7 @@ export default async function Home() {
   const recipes = await getRecipes();
 
   return (
-    <main className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-blue-200 via-teal-300 to-green-400 space-y-10">
+    <main className="flex flex-col items-center justify-center pt-36 bg-gradient-to-r from-blue-200 via-teal-300 to-green-400 space-y-10">
       <div className="mb-10 text-center">
         <h1 className="text-5xl text-white font-bold">Recipes</h1>
         <p className="text-xl text-white mt-2">Your ultimate source for culinary inspiration!</p>
@@ -43,9 +43,10 @@ export default async function Home() {
         </Drawer>
 
       </div>
-      <div className="flex items-center space-x-10">
+      <div className="flex flex-wrap justify-center items-center container">
         {recipes.map((recipe: any) => (
-          <Card className='bg-white shadow-2xl' key={recipe.id}>
+          <div className='w-1/3 px-6' key={recipe.id}>
+          <Card className='bg-white shadow-2xl mb-10'>
             <CardContent className='p-6'>
               <Image
                 alt="Recipe Image"
@@ -67,6 +68,7 @@ export default async function Home() {
               </Button>
             </CardContent>
           </Card>
+          </div>
         ))}
       </div>
     </main>

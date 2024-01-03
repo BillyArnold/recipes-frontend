@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import NewRecipeButton from '@/components/buttons/NewRecipeButton'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,9 +27,7 @@ export default function RootLayout({
           </Link>
         </div>
         <div>
-        <Link href="/login">
-        <Button className='mr-4 p-4 rounded-2xl bg-white text-black'>New Recipe</Button>
-        </Link>
+          <NewRecipeButton />
         <Link href="/login">
         <Button className='mr-4 p-4 rounded-2xl bg-white text-black'>Log in</Button>
         </Link>
