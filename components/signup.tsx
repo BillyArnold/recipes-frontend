@@ -3,10 +3,9 @@
  * @see https://v0.dev/t/1vLWUJZlrzR
  */
 import { CardTitle, CardDescription, CardHeader, CardContent, CardFooter, Card } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import SignupForm from "./forms/signupForm"
 
 export function Signup() {
   return (
@@ -24,29 +23,7 @@ export function Signup() {
             </CardDescription>
           </CardHeader>
           <CardContent className="bg-white p-6 space-y-6">
-            <div className="space-y-2">
-              <Label className="text-gray-600" htmlFor="signup-username">
-                Username
-              </Label>
-              <Input
-                className="border-2 border-blue-200 rounded-md p-2 focus:border-blue-500 focus:outline-none w-full"
-                id="signup-username"
-                placeholder="Username"
-                required
-                type="text"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label className="text-gray-600" htmlFor="signup-password">
-                Password
-              </Label>
-              <Input
-                className="border-2 border-blue-200 rounded-md p-2 focus:border-blue-500 focus:outline-none w-full"
-                id="signup-password"
-                required
-                type="password"
-              />
-            </div>
+            <SignupForm />
           </CardContent>
           <CardFooter className="bg-white p-6">
             <Button className="w-full bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-white font-bold py-2 px-4 rounded-md">
