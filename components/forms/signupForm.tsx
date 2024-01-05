@@ -8,7 +8,7 @@ import { Button } from "../ui/button";
 import useAuth from "@/app/hooks/useAuth";
 
 type Inputs = {
-    username: string
+    email: string
     password: string
 }
 
@@ -28,7 +28,7 @@ export default function SignupForm() {
 
     const onSubmit: SubmitHandler<Inputs> = data => {
         setIsLoading(true);
-        const signupResponse = auth.signUpUser(data.username, data.password);
+        const signupResponse = auth.signUpUser(data.email, data.password);
         setIsLoading(false);
     };
 
@@ -36,13 +36,13 @@ export default function SignupForm() {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="space-y-2">
 
-                <Label className="text-gray-600" htmlFor="username">
-                    Username
+                <Label className="text-gray-600" htmlFor="email">
+                    Email
                 </Label>
                 <input
                     className="border-2 text-black border-blue-200 rounded-md p-2 focus:border-blue-500 focus:outline-none w-full"
                     type="text"
-                    {...register("username", { required: true })}
+                    {...register("email", { required: true })}
                 />
             </div>
             <div className="space-y-2 mb-4">
