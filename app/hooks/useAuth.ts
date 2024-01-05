@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -10,50 +11,37 @@ export interface User {
 
 interface UserStore {
     user: User | null;
-    token: string;
+    token: string | null;
     checkToken: () => void;
     logInUser: (email: string, password: string, token: string | null) => Promise<void>;
-    logOutUser: () => void;
+    logOutUser: () => Promise<void>;
     signUpUser(email: string, password: string): unknown;
 }
 
 const useAuth = create<UserStore>()(
     persist(set => ({
         user: null,
-        token: '',
+        token: null,
         checkToken: async () => {
             console.log('checking token');
         },
-        logInUser: async (email: string, password: string, token: string | null) => {
-            //await fetch('/api/authentication/login', {
-            //    method: 'POST',
-            //    credentials: 'same-origin',
-            //    body: JSON.stringify({ email, password, _token: token })
-            //})
-            //    .then(response => response.json())
-            //    .then(response => {
-            //        // eslint-disable-next-line prefer-const
-            //        const { status, message, data } = response;
-            //        const errors = data.errors;
-            //        if (data && data.user) {
-            //            set({ user: data.user });
-            //        }
-            //        return {
-            //            status, message, errors
-            //        };
-            //    })
-            //    .catch(error => {
-            //        console.warn('failed fetching user', error);
-            //        return { status: 'failed', message: 'WRONG' };
-            //    });
+        logInUser: async (email: string, password: string) => {
+            await fetch(`${process.env.API_URL}/auth/login`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    email,
+                    password,
+                })
+            })
+                .then(response => response.json())
+                .then(response => {
+                    if (response.access_token) {
+                        set({ user: response, token: response.access_token });
+                    }
+                });
         },
-        logOutUser: () => {
-            //set({ user: null });
-            //fetch('/account/logout', {
-            //    credentials: 'same-origin',
-            //  }).then(() => {
-            //    set({ user: null });
-            //  });
+        logOutUser: async () => {
+            set({ user: null, token: null });
         },
         signUpUser: async (
             email: string, 
@@ -72,36 +60,11 @@ const useAuth = create<UserStore>()(
             })
                 .then(response => response.json())
                 .then(response => {
-                    console.log(response);
+                    if (response.access_token) {
+                        set({ token: response.access_token, user: response });
+                        toast(`${response.username} created`);
+                    }
                 });
-            //await fetch('/api/authentication/signup', {
-            //    method: 'POST',
-            //    credentials: 'same-origin',
-            //    body: JSON.stringify({
-            //      email,
-            //      phone,
-            //      firstName,
-            //      lastName,
-            //      sex,
-            //      optIn,
-            //      _token: token,
-            //      country
-            //    })
-            //  })
-            //    .then(response => response.json())
-            //    .then(response => {
-            //        console.log(response);
-            //      const { status, message, data } = response;
-            //      const errors = data.errors;
-            //      if (data && data.user) {
-            //        set({ user: data.user });
-            //      }
-            //      return { status, message, errors };
-            //    })
-            //    .catch(error => {
-            //      console.warn('failed fetching user', error);
-            //      return { status: 'failed', message: 'WRONG' };
-            //    });
         }
     }),
         {

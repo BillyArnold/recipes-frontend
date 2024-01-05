@@ -6,6 +6,7 @@ import { Label } from "../ui/label";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import useAuth from "@/app/hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 type Inputs = {
     email: string
@@ -16,6 +17,7 @@ export default function SignupForm() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const auth = useAuth();
+    const router = useRouter();
 
     const {
         register,
@@ -29,6 +31,7 @@ export default function SignupForm() {
     const onSubmit: SubmitHandler<Inputs> = data => {
         setIsLoading(true);
         const signupResponse = auth.signUpUser(data.email, data.password);
+        router.push('/')
         setIsLoading(false);
     };
 

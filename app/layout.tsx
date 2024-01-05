@@ -4,6 +4,8 @@ import './globals.css'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import NewRecipeButton from '@/components/buttons/NewRecipeButton'
+import { Toaster } from 'react-hot-toast'
+import Navigation from '@/components/navigation/navigation'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,22 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
-      <nav className='flex fixed top-0 left-0 justify-between items-center w-full p-6'>
-        <div>
-          <Link href="/">
-            <Button className='mr-4 p-4 rounded-2xl bg-white text-black font-bold'>Recipes</Button>
-          </Link>
-        </div>
-        <div>
-          <NewRecipeButton />
-        <Link href="/login">
-        <Button className='mr-4 p-4 rounded-2xl bg-white text-black'>Log in</Button>
-        </Link>
-        <Button className='mr-4 p-4 rounded-2xl bg-white text-black'>Log out</Button>
-        <Button className='mr-4 p-4 rounded-2xl'>Account</Button>
-        </div>
-      </nav>
-        {children}</body>
+        <Navigation />
+        {children}
+        <Toaster />  
+      </body>
     </html>
   )
 }
