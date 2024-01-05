@@ -59,6 +59,8 @@ const useAuth = create<UserStore>()(
             email: string, 
             password: string
         ) => {
+            console.log('email', email, 'password', password);
+            //await fetch(`${process.env.API_URL}`)
             //await fetch('/api/authentication/signup', {
             //    method: 'POST',
             //    credentials: 'same-origin',

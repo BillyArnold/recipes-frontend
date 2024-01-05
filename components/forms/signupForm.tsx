@@ -1,17 +1,21 @@
 'use client';
 
-import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { useState } from "react";
+import { Button } from "../ui/button";
+import useAuth from "@/app/hooks/useAuth";
 
 type Inputs = {
     username: string
     password: string
-  }
+}
 
 export default function SignupForm() {
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    const auth = useAuth();
 
     const {
         register,
@@ -19,19 +23,12 @@ export default function SignupForm() {
         formState: {
             errors
         }
-    } = useForm<Inputs>({
-        defaultValues: {
-            username: '',
-            password: '',
-        }
-    });
+    } = useForm<Inputs>();
 
 
-    const onSubmit: SubmitHandler<Inputs> = async data => {
+    const onSubmit: SubmitHandler<Inputs> = data => {
         setIsLoading(true);
-        // TO DO:
-        // Validation errors with signup still exist
-        console.log('submitted', data);
+        const signupResponse = auth.signUpUser(data.username, data.password);
         setIsLoading(false);
     };
 
@@ -46,9 +43,9 @@ export default function SignupForm() {
                     className="border-2 text-black border-blue-200 rounded-md p-2 focus:border-blue-500 focus:outline-none w-full"
                     type="text"
                     {...register("username", { required: true })}
-                    />
+                />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 mb-4">
                 <Label className="text-gray-600" htmlFor="password">
                     Password
                 </Label>
@@ -56,8 +53,11 @@ export default function SignupForm() {
                     className="border-2 text-black border-blue-200 rounded-md p-2 focus:border-blue-500 focus:outline-none w-full"
                     type="password"
                     {...register("password", { required: true })}
-                    />
+                />
             </div>
+            <Button disabled={isLoading ? true : false} type="submit" className="w-full bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-white font-bold py-2 px-4 rounded-md">
+                Sign up
+            </Button>
         </form>
     );
 }
