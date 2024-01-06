@@ -17,6 +17,6 @@ export default function LogoutButton() {
     }
 
     return (
-        <Button className='mr-4 p-4 rounded-2xl bg-white text-black' onClick={() => logOut()}>Log out</Button>
+        <Button className='mr-4 p-4 rounded-2xl bg-white text-black shadow-md' onClick={() => logOut()}>Log out</Button>
     );
 }

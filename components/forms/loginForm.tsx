@@ -13,7 +13,7 @@ type Inputs = {
     password: string
 }
 
-export default function SignupForm() {
+export default function LoginForm() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const auth = useAuth();
@@ -30,8 +30,8 @@ export default function SignupForm() {
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         setIsLoading(true);
-        const signupResponse = await auth.signUpUser(data.email, data.password);
-        router.push('/')
+        const loginResponse = await auth.logInUser(data.email, data.password);
+        router.push('/');
         setIsLoading(false);
     };
 
@@ -59,7 +59,7 @@ export default function SignupForm() {
                 />
             </div>
             <Button disabled={isLoading ? true : false} type="submit" className="w-full bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-white font-bold py-2 px-4 rounded-md">
-                Sign up
+                Login
             </Button>
         </form>
     );

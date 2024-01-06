@@ -15,7 +15,7 @@ export default function NewRecipeButton() {
     }
 
     return (
-        <Button onClick={() => createNewBlankRecipe()} className="mr-4 p-4 rounded-2xl bg-white text-black">
+        <Button onClick={() => createNewBlankRecipe()} className="mr-4 p-4 shadow-md rounded-2xl bg-white text-black">
             New Recipe
         </Button>
     );
