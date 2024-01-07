@@ -1,22 +1,39 @@
 'use client'
 
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 
 interface CategorySelectProps {
-    RecipeCategory: any
     recipeId: number
+    categories: any[]
 }
 
-export default function CategorySelect({ RecipeCategory, recipeId}: CategorySelectProps) {
+export default function CategorySelect({ recipeId, categories }: CategorySelectProps) {
+
+    const addRecipeCategory = (recipeId: number, categoryId: number) => {
+        console.log(recipeId, categoryId);
+    }
+
     return (
         <>
-                    {RecipeCategory.map((category: any) => (
-                        <div className="flex items-center justify-center gap-2" key={category.id}>
-                            <Badge variant="secondary" key={category.id}>{category.category.name}</Badge>
-                            <Button variant="outline" className="rounded-2xl p-2 h-6 flex items-center justify-center">x</Button>
-                        </div>
-                    ))}
+                    <Select onValueChange={(value) => addRecipeCategory(recipeId, parseInt(value))}>
+                        <SelectTrigger className="w-[180px]">
+                            <SelectValue placeholder="Select a category" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectGroup>
+                                {categories && categories.map((category: any) => (
+                                    <SelectItem key={category.id} value={category.id}>{category.name}</SelectItem>
+                                ))}
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
         </>
     )
 }
