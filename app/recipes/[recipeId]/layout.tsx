@@ -19,7 +19,7 @@ export default function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <Navigation />
-                <main className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-200 via-teal-300 to-green-400 space-y-10 pt-20">
+                <main className="flex flex-col min-h-screen bg-gradient-to-r from-blue-200 via-teal-300 to-green-400 space-y-10 pt-32">
                     {children}
                 </main>
             </body>
