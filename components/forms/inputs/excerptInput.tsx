@@ -4,13 +4,13 @@ import updateRecipe from "@/app/actions/updateRecipe";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-interface TitleInputProps {
-    title?: string
+interface ExcerptInputProps {
+    excerpt?: string
     recipeId: number
 }
-export default function TitleInput({ title, recipeId }: TitleInputProps) {
-    const [inputValue, setInputValue] = useState(title);
-    const [debouncedValue, setDebouncedValue] = useState(title);
+export default function ExcerptInput({ excerpt, recipeId }: ExcerptInputProps) {
+    const [inputValue, setInputValue] = useState(excerpt);
+    const [debouncedValue, setDebouncedValue] = useState(excerpt);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -22,7 +22,7 @@ export default function TitleInput({ title, recipeId }: TitleInputProps) {
     useEffect(() => {
         if (debouncedValue) {
             const recipeDetails = {
-                name: debouncedValue,
+                excerpt: debouncedValue,
                 id: recipeId
             }
 
@@ -41,8 +41,8 @@ export default function TitleInput({ title, recipeId }: TitleInputProps) {
     }, [debouncedValue, recipeId]);
     return (
         <input
-            className="text-5xl text-white block width-full bg-transparent font-bold border-0"
-            placeholder="Recipe Name"
+            className="text-md block text-white w-full bg-transparent border-0"
+            placeholder="Recipe excerpt"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
         />

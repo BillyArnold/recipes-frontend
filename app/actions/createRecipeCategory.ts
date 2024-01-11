@@ -16,6 +16,7 @@ const createRecipeCategory = async (categoryId: number, recipeId: number) => {
         headers: {
             'Content-Type': 'application/json',
         },
+        cache: 'no-store',
         body: JSON.stringify(body)
     });
 

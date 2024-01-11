@@ -3,6 +3,7 @@ import { Editor } from "novel";
 import getCategories from "@/app/actions/getCategories";
 import CategoryBadges from "@/components/recipes/categoryBadges";
 import TitleInput from "@/components/forms/inputs/titleInput";
+import ExcerptInput from "@/components/forms/inputs/excerptInput";
 
 const ListingPage = async ({ params }: { params: { recipeId: number } }) => {
   const recipe = await getRecipeById(params.recipeId);
@@ -14,11 +15,9 @@ const ListingPage = async ({ params }: { params: { recipeId: number } }) => {
 
   return (
     <>
-      <div className="text-left w-[1100px] max-w-full py-4 px-8">
-        <TitleInput title={recipe.name} />
-        <p className="text-gray-500 text-sm mt-2">
-          Fast and easy stir fry recipe for a healthy meal.
-        </p>
+      <div className="text-left block w-[1100px] mx-auto max-w-full py-4 px-8">
+        <TitleInput recipeId={recipe.id} title={recipe.name} />
+        <ExcerptInput recipeId={recipe.id} excerpt={recipe.excerpt} />
         <div className="flex flex-wrap justify-left gap-2 mt-4">
           <CategoryBadges
             recipeId={recipe.id}
@@ -27,7 +26,7 @@ const ListingPage = async ({ params }: { params: { recipeId: number } }) => {
           />
         </div>
       </div>
-      <div className="w-[1100px] max-w-full py-4 px-8 mt-0">
+      <div className="w-[1100px] mx-auto max-w-full py-4 px-8 mt-0">
         <Editor
           defaultValue={"hello"}
           className="w-full bg-white text-black shadow-lg rounded-2xl mb-10"

@@ -4,6 +4,7 @@ const deleteRecipeCategory = async (recipeCategoryId: number) => {
         headers: {
             'Content-Type': 'application/json',
         },
+        cache:"no-store"
     });
 
     const data = await response.json();
