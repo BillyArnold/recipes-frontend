@@ -4,6 +4,7 @@ import getCategories from "@/app/actions/getCategories";
 import CategoryBadges from "@/components/recipes/categoryBadges";
 import TitleInput from "@/components/forms/inputs/titleInput";
 import ExcerptInput from "@/components/forms/inputs/excerptInput";
+import RecipeImageUpload from "@/components/forms/inputs/recipeImageUpload"
 
 const ListingPage = async ({ params }: { params: { recipeId: number } }) => {
   const recipe = await getRecipeById(params.recipeId);
@@ -25,6 +26,7 @@ const ListingPage = async ({ params }: { params: { recipeId: number } }) => {
             RecipeCategory={recipe.RecipeCategory}
           />
         </div>
+        <RecipeImageUpload recipeId={recipe.id} />
       </div>
       <div className="w-[1100px] mx-auto max-w-full py-4 px-8 mt-0">
         <Editor

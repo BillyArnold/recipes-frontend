@@ -41,7 +41,7 @@ export default function TitleInput({ title, recipeId }: TitleInputProps) {
     }, [debouncedValue, recipeId]);
     return (
         <input
-            className="text-5xl text-white block width-full bg-transparent font-bold border-0"
+            className="text-5xl text-white block w-full bg-transparent font-bold border-0"
             placeholder="Recipe Name"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
