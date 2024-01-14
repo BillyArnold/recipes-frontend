@@ -17,18 +17,18 @@ export default function Navigation() {
             </div>
             <div>
                 {!auth.user && (
-                    <>
+                    <div>
                         <Link href="/login">
                             <Button className='mr-4 p-4 rounded-2xl bg-white text-black'>Log in</Button>
                         </Link>
-                    </>
+                    </div>
                 )}
                 {auth.user && (
-                    <>
+                    <div>
                         <NewRecipeButton />
                         <LogoutButton />
                         <Button className='mr-4 p-4 rounded-2xl bg-white text-black shadow-md'>Account</Button>
-                    </>
+                    </div>
                 )}
             </div>
         </nav>

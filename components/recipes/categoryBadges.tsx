@@ -21,7 +21,7 @@ interface CategoryBadgesProps {
     allCategories: []
 }
 
-export default function CategoryBadges({ RecipeCategory, recipeId, allCategories}: CategoryBadgesProps) {
+export default function CategoryBadges({ RecipeCategory, recipeId, allCategories }: CategoryBadgesProps) {
     const [categories, setCategories] = useState<any>(RecipeCategory);
     const [defaultValue, setDefaultValue] = useState<any>(null);
     const selectRef = useRef<any>(null);
@@ -55,25 +55,27 @@ export default function CategoryBadges({ RecipeCategory, recipeId, allCategories
     }
 
     return (
-        <>
-                    {categories.map((category: any) => (
-                        <div className="flex items-center justify-center gap-2" key={category.id}>
-                            <Badge variant="secondary" key={category.id}>{category.category.name}</Badge>
-                            <Button onClick={() => deleteRC(category.id)} variant="outline" className="rounded-2xl p-2 h-6 flex items-center justify-center">x</Button>
-                        </div>
-                    ))}
-                    <Select value={defaultValue} onValueChange={(value) => addRC(recipeId, parseInt(value))}>
-                        <SelectTrigger className="w-[180px]">
-                            <SelectValue placeholder="Select a category" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectGroup>
-                                {allCategories && allCategories.map((category: any) => (
-                                    <SelectItem key={category.id} value={category.id}>{category.name}</SelectItem>
-                                ))}
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
-        </>
+        <div>
+            <div className="flex items-center justify-center gap-2 mb-2">
+                {categories && categories.map((category: any) => (
+                    <div className="flex items-center justify-center gap-2" key={category.id}>
+                        <Badge variant="secondary" key={category.id}>{category.category.name}</Badge>
+                        <Button onClick={() => deleteRC(category.id)} variant="outline" className="rounded-2xl p-2 h-6 flex items-center justify-center">x</Button>
+                    </div>
+                ))}
+                <Select value={defaultValue} onValueChange={(value) => addRC(recipeId, parseInt(value))}>
+                    <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Select a category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectGroup>
+                            {allCategories && allCategories.map((category: any) => (
+                                <SelectItem key={category.id} value={category.id}>{category.name}</SelectItem>
+                            ))}
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+            </div>
+        </div>
     )
 }

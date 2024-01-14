@@ -30,7 +30,7 @@ export default function ExcerptInput({ excerpt, recipeId }: ExcerptInputProps) {
                 try {
                     const recipe = await updateRecipe(recipeDetails);
                     if (recipe) {
-                        toast.success("Recipe Title Updated");
+                        toast.success("Recipe excerpt Updated");
                     }
                 } catch {
                     toast.error("Something went wrong updating the recipe");
@@ -38,12 +38,12 @@ export default function ExcerptInput({ excerpt, recipeId }: ExcerptInputProps) {
             }
             updateRecipeTitle(recipeDetails);
         }
-    }, [debouncedValue, recipeId]);
+    }, [debouncedValue]);
     return (
         <input
             className="text-md block text-white w-full bg-transparent border-0"
             placeholder="Recipe excerpt"
-            value={inputValue}
+            value={inputValue || ''}
             onChange={(e) => setInputValue(e.target.value)}
         />
     );

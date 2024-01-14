@@ -5,6 +5,7 @@ import CategoryBadges from "@/components/recipes/categoryBadges";
 import TitleInput from "@/components/forms/inputs/titleInput";
 import ExcerptInput from "@/components/forms/inputs/excerptInput";
 import RecipeImageUpload from "@/components/forms/inputs/recipeImageUpload"
+import RecipeEditor from "@/components/forms/inputs/recipeEditor";
 
 const ListingPage = async ({ params }: { params: { recipeId: number } }) => {
   const recipe = await getRecipeById(params.recipeId);
@@ -15,7 +16,7 @@ const ListingPage = async ({ params }: { params: { recipeId: number } }) => {
   }
 
   return (
-    <>
+    <div>
       <div className="text-left block w-[1100px] mx-auto max-w-full py-4 px-8">
         <TitleInput recipeId={recipe.id} title={recipe.name} />
         <ExcerptInput recipeId={recipe.id} excerpt={recipe.excerpt} />
@@ -28,13 +29,8 @@ const ListingPage = async ({ params }: { params: { recipeId: number } }) => {
         </div>
         <RecipeImageUpload recipeId={recipe.id} />
       </div>
-      <div className="w-[1100px] mx-auto max-w-full py-4 px-8 mt-0">
-        <Editor
-          defaultValue={"hello"}
-          className="w-full bg-white text-black shadow-lg rounded-2xl mb-10"
-        />
-      </div>
-    </>
+      <RecipeEditor recipeId={recipe.id} defaultContent={recipe.instructions} />
+    </div>
   );
 };
 

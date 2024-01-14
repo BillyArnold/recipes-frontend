@@ -12,9 +12,8 @@ interface RecipeListingProps {
 }
 export default function RecipeListing({ recipes }: RecipeListingProps) {
     return (
-
         <div className="flex flex-wrap justify-center items-center container mt-10">
-            {recipes.map((recipe: any) => (
+            {recipes && recipes.map((recipe: any) => (
                 <div className='w-1/3 px-6 text-left' key={recipe.id}>
                     <Card className='bg-white shadow-2xl mb-10'>
                         <CardContent className='p-6'>

@@ -2,7 +2,7 @@ const uploadRecipeImage = async (file: any, recipeId: number) => {
     const formData = new FormData();
     formData.append("file", file);
 
-    const response = await fetch(`${process.env.API_URL}/recipes/upload-image`, {
+    const response = await fetch(`${process.env.API_URL}/recipes/${recipeId}/upload-image`, {
         method: 'POST',
         body: formData,
     });
