@@ -1,7 +1,7 @@
 'use client';
 
 import updateRecipe from "@/app/actions/updateRecipe";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import toast from "react-hot-toast";
 
 interface TitleInputProps {
@@ -10,35 +10,40 @@ interface TitleInputProps {
 }
 export default function TitleInput({ title, recipeId }: TitleInputProps) {
     const [inputValue, setInputValue] = useState(title);
-    const [debouncedValue, setDebouncedValue] = useState(title);
+
+    const handleDebouncedChange = (value: string) => {
+        // Your logic remains the same
+        const recipeDetails = {
+            name: value,
+            id: recipeId
+        };
+
+        const updateRecipeTitle = async (recipeDetails: any) => {
+            try {
+                const recipe = await updateRecipe(recipeDetails);
+                if (recipe) {
+                    toast.success("Recipe Title Updated");
+                }
+            } catch {
+                toast.error("Something went wrong updating the recipe");
+            }
+        }
+        
+        if (title !== value) {
+            updateRecipeTitle(recipeDetails);
+        }
+    }
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            setDebouncedValue(inputValue);
+            if (inputValue) {
+                handleDebouncedChange(inputValue);
+            }
         }, 500);
+
         return () => clearTimeout(timer);
-    }, [inputValue]);
+    }, [inputValue, recipeId]); // Add recipeId to the dependencies to handle changes in recipeId
 
-    useEffect(() => {
-        if (debouncedValue) {
-            const recipeDetails = {
-                name: debouncedValue,
-                id: recipeId
-            }
-
-            const updateRecipeTitle = async (recipeDetails: any) => {
-                try {
-                    const recipe = await updateRecipe(recipeDetails);
-                    if (recipe) {
-                        toast.success("Recipe Title Updated");
-                    }
-                } catch {
-                    toast.error("Something went wrong updating the recipe");
-                }
-            }
-            updateRecipeTitle(recipeDetails);
-        }
-    }, [debouncedValue]);
     return (
         <input
             className="text-5xl text-white block w-full bg-transparent font-bold border-0"

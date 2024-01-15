@@ -10,35 +10,39 @@ interface ExcerptInputProps {
 }
 export default function ExcerptInput({ excerpt, recipeId }: ExcerptInputProps) {
     const [inputValue, setInputValue] = useState(excerpt);
-    const [debouncedValue, setDebouncedValue] = useState(excerpt);
+
+    const handleDebouncedChange = (value: string) => {
+        const recipeDetails = {
+            excerpt: value,
+            id: recipeId
+        }
+
+        const updateRecipeTitle = async (recipeDetails: any) => {
+            try {
+                const recipe = await updateRecipe(recipeDetails);
+                if (recipe) {
+                    toast.success("Recipe excerpt Updated");
+                }
+            } catch {
+                toast.error("Something went wrong updating the recipe");
+            }
+        }
+
+        if (excerpt !== value) {
+            updateRecipeTitle(recipeDetails);
+        }
+    }
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            setDebouncedValue(inputValue);
+            if (inputValue) {
+                handleDebouncedChange(inputValue);
+            }
         }, 500);
+
         return () => clearTimeout(timer);
-    }, [inputValue]);
+    }, [inputValue, recipeId]); 
 
-    useEffect(() => {
-        if (debouncedValue) {
-            const recipeDetails = {
-                excerpt: debouncedValue,
-                id: recipeId
-            }
-
-            const updateRecipeTitle = async (recipeDetails: any) => {
-                try {
-                    const recipe = await updateRecipe(recipeDetails);
-                    if (recipe) {
-                        toast.success("Recipe excerpt Updated");
-                    }
-                } catch {
-                    toast.error("Something went wrong updating the recipe");
-                }
-            }
-            updateRecipeTitle(recipeDetails);
-        }
-    }, [debouncedValue]);
     return (
         <input
             className="text-md block text-white w-full bg-transparent border-0"
