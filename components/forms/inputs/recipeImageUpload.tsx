@@ -18,6 +18,9 @@ export default function RecipeImageUpload({ recipeId }: RecipeImageUploadProps) 
         if (file) {
             try {
                 const uploadRecipeImageRes = await uploadRecipeImage(file, recipeId);
+                if (uploadRecipeImageRes) {
+                    toast.success("Recipe Image Uploaded");
+                }
             } catch {
                 toast.error("Something went wrong uploading the image");
             }
