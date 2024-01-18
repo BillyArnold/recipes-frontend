@@ -18,7 +18,7 @@ export default async function Home() {
   const recipes = await getRecipes();
 
   return (
-    <main className="flex flex-col items-center justify-center pt-36 bg-gradient-to-r from-blue-200 via-teal-300 to-green-400 space-y-10">
+    <main className="flex flex-col items-center justify-center pt-36 bg-gradient-to-r from-blue-700 via-teal-800 to-green-900 space-y-10">
       <div className="mb-10 text-center">
         <h1 className="text-5xl text-white font-bold">Recipes</h1>
         <p className="text-xl text-white mt-2">Your ultimate source for culinary inspiration!</p>

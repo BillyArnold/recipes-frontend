@@ -18,7 +18,7 @@ export default function RootLayout({
     return (
         <div>
             <Navigation />
-            <main className="flex flex-col min-h-screen bg-gradient-to-r from-blue-200 via-teal-300 to-green-400 space-y-10 pt-32">
+            <main className="flex flex-col min-h-screen bg-gradient-to-r from-blue-700 via-teal-800 to-green-900 space-y-10 pt-32">
                 {children}
             </main>
         </div>

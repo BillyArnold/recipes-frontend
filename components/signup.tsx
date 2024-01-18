@@ -8,12 +8,12 @@ import SignupForm from "./forms/signupForm"
 
 export function Signup() {
   return (
-    <main className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-blue-200 via-teal-300 to-green-400 space-y-10">
+    <main className="flex flex-col items-center justify-center h-screen bg-gradient-to-r  from-blue-700 via-teal-800 to-green-900 space-y-10">
       <div className="mb-10 text-center">
         <h1 className="text-5xl text-white font-bold">Recipes</h1>
         <p className="text-xl text-white mt-2">Your ultimate source for culinary inspiration!</p>
       </div>
-      <div className="flex items-center space-x-10">
+      <div className="flex items-center space-x-10 px-2">
         <Card className="max-w-sm bg-white w-full shadow-2xl rounded-xl overflow-hidden">
           <CardHeader className="bg-white p-6">
             <CardTitle className="text-3xl text-center font-bold text-blue-700">Sign Up</CardTitle>

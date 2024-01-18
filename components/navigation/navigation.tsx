@@ -19,14 +19,14 @@ export default function Navigation() {
                 {!auth.user && (
                     <div>
                         <Link href="/login">
-                            <Button className='mr-4 p-4 rounded-2xl bg-white text-black'>Log in</Button>
+                            <Button className='p-4 rounded-2xl bg-white text-black'>Log in</Button>
                         </Link>
                     </div>
                 )}
                 {auth.user && (
-                    <div>
+                    <div className='flex'>
                         <NewRecipeButton />
-                        <LogoutButton />
+                        {/* <LogoutButton /> */}
                         <Link href="/account/dashboard">
                             <Button className='mr-4 p-4 rounded-2xl bg-white text-black shadow-md'>Account</Button>
                         </Link>
