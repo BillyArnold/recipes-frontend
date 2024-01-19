@@ -12,7 +12,7 @@ export interface User {
 interface UserStore {
     user: User | null;
     token: string | null;
-    checkToken: () => void;
+    checkToken: (token: string) => void;
     logInUser: (email: string, password: string) => Promise<void>;
     logOutUser: () => Promise<void>;
     signUpUser(email: string, password: string): unknown;
@@ -22,8 +22,21 @@ const useAuth = create<UserStore>()(
     persist(set => ({
         user: null,
         token: null,
-        checkToken: async () => {
-            console.log('checking token');
+        checkToken: async (token: string) => {
+            if (!token) {
+                toast.error('Your session has expired');
+            }
+            await fetch(`${process.env.API_URL}/auth/profile`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+            })
+                .then(response => response.json())
+                .then(response => {
+                    console.log(response);
+                })
         },
         logInUser: async (email: string, password: string) => {
             await fetch(`${process.env.API_URL}/auth/login`, {

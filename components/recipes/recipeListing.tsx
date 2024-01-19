@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import CategoryBadgesUI from "./categoryBadgesUI";
 import { IoMdHeart } from "react-icons/io";
+import SaveRecipeButton from "../buttons/saveRecipeButton";
 
 
 interface RecipeListingProps {
@@ -28,10 +29,7 @@ export default function RecipeListing({ recipes }: RecipeListingProps) {
                             </Link>
                             <p className="text-gray-500 text-sm mt-2">{recipe.excerpt}</p>
                             <CategoryBadgesUI RecipeCategory={recipe.RecipeCategory}/>
-                            <Button className="absolute top-4 p-0 right-4" size="icon" variant="ghost">
-                                <IoMdHeart size={20} />
-                                <span className="sr-only">Favorite</span>
-                            </Button>
+                            <SaveRecipeButton recipeId={recipe.id} />
                         </CardContent>
                     </Card>
                 </div>
