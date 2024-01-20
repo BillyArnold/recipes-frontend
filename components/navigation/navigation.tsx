@@ -28,7 +28,7 @@ export default function Navigation() {
                         <NewRecipeButton />
                         {/* <LogoutButton /> */}
                         <Link href="/account/dashboard">
-                            <Button className='mr-4 p-4 rounded-2xl bg-white text-black shadow-md'>Account</Button>
+                            <Button className='p-4 rounded-2xl bg-white text-black shadow-md'>Account</Button>
                         </Link>
                     </div>
                 )}
