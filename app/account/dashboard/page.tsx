@@ -5,17 +5,21 @@ import useAuth from '@/app/hooks/useAuth';
 import LogoutButton from '@/components/buttons/logoutButton';
 import NewMealPlanButton from '@/components/buttons/newMealPlanButton';
 import RecipeCarousel from '@/components/recipeCarousel';
+import MealPlanCarousel from '@/components/mealPlanCarousel';
 import { useEffect, useState } from 'react';
 
 export default function Dashboard() {
   const auth = useAuth();
   const [savedRecipes, setSavedRecipes] = useState([]);
+  const [savedMealPlans, setSavedMealPlans] = useState([]);
 
   useEffect(() => {
     const getSavedRecipes = async (auth: any) => {
       const data = await getSavedRecipesForUser(auth.user)
         .then((data) => {
+          console.log('data', data);
           setSavedRecipes(data.recipes);
+          setSavedMealPlans(data.mealPlans);
         });
     };
 
@@ -42,7 +46,7 @@ export default function Dashboard() {
         <div className='py-4'></div>
         <h2 className='text-3xl font-bold'>Saved MealPlans</h2>
         <div className='py-4'></div>
-        {/* Mealplancarousel to go here */}
+        <MealPlanCarousel mealPlans={savedMealPlans} />
         <div className='py-4'></div>
       </div>
     </main>
