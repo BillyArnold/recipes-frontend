@@ -1,4 +1,5 @@
 import getMealPlanById from "@/app/actions/getMealPlanById";
+import MealPlanTitleInput from "@/components/forms/inputs/mealPlanTitleInput";
 import DraggableList from "@/components/mealPlans/draggableList";
 
 const ListingPage = async ({ params }: { params: { mealPlanId: number } }) => {
@@ -11,7 +12,7 @@ const ListingPage = async ({ params }: { params: { mealPlanId: number } }) => {
   return (
     <div>
       <div className="text-left block w-[1100px] mx-auto max-w-full pt-4 px-8">
-        <h2>This is a new mealplan</h2>
+        <MealPlanTitleInput mealPlanId={mealPlan.id} title={mealPlan.name} />
         <DraggableList />
       </div>
     </div>

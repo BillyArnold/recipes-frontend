@@ -4,7 +4,7 @@ import getCategories from "@/app/actions/getCategories";
 import CategoryBadges from "@/components/recipes/categoryBadges";
 import TitleInput from "@/components/forms/inputs/titleInput";
 import ExcerptInput from "@/components/forms/inputs/excerptInput";
-import RecipeImageUpload from "@/components/forms/inputs/recipeImageUpload"
+import RecipeImageUpload from "@/components/forms/inputs/recipeImageUpload";
 import RecipeEditor from "@/components/forms/inputs/recipeEditor";
 import Image from "next/image";
 
@@ -34,7 +34,11 @@ const ListingPage = async ({ params }: { params: { recipeId: number } }) => {
           alt="Recipe Image"
           className="w-full md:w-1/2 aspect-[4/3] object-cover rounded-lg mb-2"
           height="600"
-          src={recipe.imagePath ? process.env.API_URL + '/recipes/' + recipe.imagePath : "https://via.placeholder.com/640x360"}
+          src={
+            recipe.imagePath
+              ? process.env.API_URL + "/recipes/" + recipe.imagePath
+              : "https://via.placeholder.com/640x360"
+          }
           width="800"
         />
       </div>
