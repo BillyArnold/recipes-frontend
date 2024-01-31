@@ -16,6 +16,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import getSavedRecipesForUser from "@/app/actions/getSavedRecipesForUser";
 
 interface SaveRecipeButtonProps {
   recipeId: number;
@@ -25,22 +26,20 @@ export default function AddToMealPlanButton({
 }: SaveRecipeButtonProps) {
   const auth = useAuth();
 
-  useEffect(() => {}, []);
-
-  const saveRecipe = async (recipeId: number) => {
+  const getUserInfo = async () => {
     if (auth.user?.id) {
-      const res = await favouriteRecipe({
-        recipe: { connect: { id: recipeId } },
-        user: { connect: { id: auth.user.id } },
-      }).then((data: any) => {
-        if (data) {
-          toast.success("Recipe saved");
-        }
+      const res = await getSavedRecipesForUser(auth.user.id).then((data) => {
+        console.log(data);
+        toast.success("TEST");
       });
     } else {
       toast.error("Could not save recipe");
     }
   };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
 
   if (!auth.user) {
     return null;
