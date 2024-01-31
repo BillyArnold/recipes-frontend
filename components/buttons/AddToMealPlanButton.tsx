@@ -3,9 +3,8 @@
 import useAuth from "@/app/hooks/useAuth";
 import { Button } from "../ui/button";
 import { FaPlus } from "react-icons/fa";
-import favouriteRecipe from "@/app/actions/favouriteRecipe";
 import toast from "react-hot-toast";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Drawer,
   DrawerClose,
@@ -24,21 +23,19 @@ interface SaveRecipeButtonProps {
 export default function AddToMealPlanButton({
   recipeId,
 }: SaveRecipeButtonProps) {
+  const [mealPlans, setMealPlans] = useState(null);
+  const [loadingMealPlans, setLoadingMealPlans] = useState(true);
   const auth = useAuth();
 
-  const getUserInfo = async () => {
+  useEffect(() => {
     if (auth.user?.id) {
-      const res = await getSavedRecipesForUser(auth.user.id).then((data) => {
-        console.log(data);
-        toast.success("TEST");
+      const res = getSavedRecipesForUser(auth.user).then((data) => {
+        setMealPlans(data.mealPlans);
+        setLoadingMealPlans(false);
       });
     } else {
       toast.error("Could not save recipe");
     }
-  };
-
-  useEffect(() => {
-    getUserInfo();
   }, []);
 
   if (!auth.user) {
@@ -53,7 +50,13 @@ export default function AddToMealPlanButton({
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>Which Meal Plan to add to?</DrawerTitle>
-          <DrawerDescription></DrawerDescription>
+          <DrawerDescription>
+            {loadingMealPlans ? (
+              <div>Loading meal plans...</div>
+            ) : (
+              <div>Meals loaded</div>
+            )}
+          </DrawerDescription>
         </DrawerHeader>
         <DrawerFooter>
           <Button>Submit</Button>
