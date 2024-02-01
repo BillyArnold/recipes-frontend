@@ -25,6 +25,16 @@ import {
 } from "@/components/ui/select";
 import getSavedRecipesForUser from "@/app/actions/getSavedRecipesForUser";
 
+const days = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
+
 interface SaveRecipeButtonProps {
   recipeId: number;
 }
@@ -64,24 +74,44 @@ export default function AddToMealPlanButton({
             {loadingMealPlans ? (
               <div>Loading meal plans...</div>
             ) : (
-              <Select
-                value={selectedMealPlan?.id}
-                onValueChange={(value) => console.log(value)}
-              >
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Select a category" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {mealPlans &&
-                      mealPlans.map((mealPlan: any) => (
-                        <SelectItem key={mealPlan.id} value={mealPlan.id}>
-                          {mealPlan.name}
+              <div>
+                <Select
+                  value={selectedMealPlan?.id}
+                  onValueChange={(value) => console.log(value)}
+                >
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Select a meal plan" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {mealPlans &&
+                        mealPlans.map((mealPlan: any) => (
+                          <SelectItem key={mealPlan.id} value={mealPlan.id}>
+                            {mealPlan.name}
+                          </SelectItem>
+                        ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <div className="mb-4"></div>
+                <Select
+                  value={days[0]}
+                  onValueChange={(value) => console.log(value)}
+                >
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Select a day" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {days.map((day: any) => (
+                        <SelectItem key={day} value={day}>
+                          {day}
                         </SelectItem>
                       ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
             )}
           </DrawerDescription>
         </DrawerHeader>
