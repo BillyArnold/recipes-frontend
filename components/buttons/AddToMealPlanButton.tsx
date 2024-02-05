@@ -24,6 +24,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import getSavedRecipesForUser from "@/app/actions/getSavedRecipesForUser";
+import createMealPlanRecipe from "@/app/actions/createMealPlanRecipe";
 
 const days = [
   "Monday",
@@ -44,7 +45,14 @@ export default function AddToMealPlanButton({
   const [mealPlans, setMealPlans] = useState([]);
   const [loadingMealPlans, setLoadingMealPlans] = useState(true);
   const [selectedMealPlan, setSelectedMealPlan] = useState<any>();
+  const [selectedDay, setSelectedDay] = useState("Monday");
   const auth = useAuth();
+
+  const addToMealPlan = async () => {
+    await createMealPlanRecipe(selectedMealPlan, selectedDay, recipeId).then(
+      (res) => toast.success("Recipe added to meal plan"),
+    );
+  };
 
   useEffect(() => {
     if (auth.user?.id) {
@@ -77,7 +85,7 @@ export default function AddToMealPlanButton({
               <div>
                 <Select
                   value={selectedMealPlan?.id}
-                  onValueChange={(value) => console.log(value)}
+                  onValueChange={(value) => setSelectedMealPlan(value)}
                 >
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Select a meal plan" />
@@ -96,7 +104,7 @@ export default function AddToMealPlanButton({
                 <div className="mb-4"></div>
                 <Select
                   value={days[0]}
-                  onValueChange={(value) => console.log(value)}
+                  onValueChange={(value) => setSelectedDay(value)}
                 >
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Select a day" />
@@ -116,7 +124,7 @@ export default function AddToMealPlanButton({
           </DrawerDescription>
         </DrawerHeader>
         <DrawerFooter className="items-start flex-row">
-          <Button>Submit</Button>
+          <Button onClick={() => addToMealPlan()}>Submit</Button>
           <DrawerClose>
             <Button variant="outline">Cancel</Button>
           </DrawerClose>
