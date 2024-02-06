@@ -13,7 +13,7 @@ const ListingPage = async ({ params }: { params: { mealPlanId: number } }) => {
     <div>
       <div className="text-left block w-[1100px] mx-auto max-w-full pt-4 px-8">
         <MealPlanTitleInput mealPlanId={mealPlan.id} title={mealPlan.name} />
-        <DraggableList />
+        <DraggableList mealPlan={mealPlan} />
       </div>
     </div>
   );
