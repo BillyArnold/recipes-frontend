@@ -73,7 +73,7 @@ export default function AddToMealPlanButton({
   return (
     <Drawer>
       <DrawerTrigger className="bg-white text-blue-700 p-2 rounded-full shadow-md absolute bottom-4 right-4 font-bold">
-        <FaPlus className="text-green-700 hover:text-red-500" size={20} />
+        <FaPlus className="text-gray-800 hover:text-gray-400" size={20} />
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
