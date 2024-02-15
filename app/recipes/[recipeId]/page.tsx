@@ -30,6 +30,7 @@ const ListingPage = async ({ params }: { params: { recipeId: number } }) => {
         </div>
         <RecipeImageUpload recipeId={recipe.id} />
 
+        <div className="bg-white p-4 w-full shadow-lg mb-2">Ingredients:</div>
         <Image
           alt="Recipe Image"
           className="w-full md:w-1/2 aspect-[4/3] object-cover rounded-lg mb-2"
