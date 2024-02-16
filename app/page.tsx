@@ -23,7 +23,7 @@ export default async function Home() {
           Your ultimate source for culinary inspiration!
         </p>
         <br />
-        <Drawer>
+        {/*        <Drawer>
           <DrawerTrigger className="bg-white text-blue-700 p-4 rounded-lg font-bold">
             Filter
           </DrawerTrigger>
@@ -42,7 +42,7 @@ export default async function Home() {
             </DrawerFooter>
           </DrawerContent>
         </Drawer>
-
+*/}
         <RecipeListing recipes={recipes} />
       </div>
     </main>
